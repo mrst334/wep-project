@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoFiles - منصة تشفير الملفات</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CryptoFiles</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#encrypt" class="nav-link">تشفير الملفات</a></li>
+                <li><a href="#ip-activation" class="nav-link">تفعيل IP</a></li>
+                <li><a href="#settings" class="nav-link">الإعدادات</a></li>
+            </ul>
+            <div class="nav-tools">
+                <select id="language-selector" class="language-selector">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="ru">Русский</option>
+                </select>
+                <div class="user-status">
+                    <i class="fas fa-file-alt"></i>
+                    <span id="remaining-files">5</span>
+                    <span>ملفات متبقية</span>
+                </div>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1>منصة تشفير الملفات المتقدمة</h1>
+                        <p>احم ملفاتك البرمجية بأقوى تقنيات التشفير المتاحة</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="showSection('encrypt')">ابدأ التشفير الآن</button>
+                            <button class="btn btn-outline">تعرف على الخدمات</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>دعم 6 لغات برمجية</h3>
+                        <p>تشفير ملفات Lua, HTML, CSS, Python, JavaScript, PHP بأعلى مستويات الأمان</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>3 مستويات تشفير</h3>
+                        <p>اختر من بين التشفير الخفيف والمتوسط والقوي حسب احتياجاتك</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>تفعيل IP المتقدم</h3>
+                        <p>تحكم في من يمكنه استخدام ملفاتك المشفرة عبر نظام IP</p>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <h2>إحصائيات المنصة</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-number" id="total-files">0</div>
+                            <div class="stat-label">ملف مشفر</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-number" id="active-users">1</div>
+                            <div class="stat-label">مستخدم نشط</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">لغة برمجية</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">مستوى الأمان</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Encrypt Section -->
+        <section id="encrypt" class="section">
+            <div class="container">
+                <h2><i class="fas fa-file-code"></i> تشفير الملفات</h2>
+                
+                <!-- File Upload Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>رفع الملفات</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="file-upload-area" id="file-upload-area">
+                            <input type="file" id="file-input" multiple accept=".lua,.html,.css,.py,.js,.php" hidden>
+                            <div class="upload-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>اسحب الملفات هنا أو انقر للتحديد</p>
+                                <small>الملفات المدعومة: .lua, .html, .css, .py, .js, .php</small>
+                            </div>
+                        </div>
+                        <div id="selected-files" class="selected-files"></div>
+                    </div>
+                </div>
+
+                <!-- Encryption Options -->
+                <div class="encryption-options">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>مستوى التشفير</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="encryption-levels">
+                                <label class="encryption-level">
+                                    <input type="radio" name="encryption-level" value="light" checked>
+                                    <div class="level-content">
+                                        <i class="fas fa-feather"></i>
+                                        <span>خفيف - سريع ومناسب للملفات الصغيرة</span>
+                                    </div>
+                                </label>
+                                <label class="encryption-level">
+                                    <input type="radio" name="encryption-level" value="medium">
+                                    <div class="level-content">
+                                        <i class="fas fa-balance-scale"></i>
+                                        <span>متوسط - توازن بين الأمان والسرعة</span>
+                                    </div>
+                                </label>
+                                <label class="encryption-level">
+                                    <input type="radio" name="encryption-level" value="strong">
+                                    <div class="level-content">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>قوي - أقصى مستوى أمان</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>خيارات متقدمة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="advanced-options">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" id="ip-protected">
+                                    <span>تفعيل حماية IP</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" id="compress-files">
+                                    <span>ضغط الملف بعد التشفير</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" id="add-expiration">
+                                    <span>إضافة توقيت انتهاء الصلاحية</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="encrypt-btn">
+                        <i class="fas fa-lock"></i>
+                        تشفير الملفات
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-eye"></i>
+                        معاينة الملف
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-cog"></i>
+                        إعدادات التشفير
+                    </button>
+                </div>
+
+                <!-- Encrypted Files List -->
+                <div class="card" id="encrypted-files-card" style="display: none;">
+                    <div class="card-header">
+                        <h3><i class="fas fa-shield-check"></i> الملفات المشفرة</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="encrypted-files-list"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IP Activation Section -->
+        <section id="ip-activation" class="section">
+            <div class="container">
+                <h2><i class="fas fa-network-wired"></i> تفعيل عناوين IP</h2>
+
+                <!-- IP Activation Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>إضافة عنوان IP جديد</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="ip-input-group">
+                            <input type="text" id="ip-input" placeholder="أدخل عنوان IP (مثال: 192.168.1.1)">
+                            <button class="btn btn-primary" id="add-ip-btn">
+                                <i class="fas fa-plus"></i>
+                                إضافة IP
+                            </button>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            يمكنك تفعيل 5 عناوين IP كحد أقصى
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active IPs List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>عناوين IP المفعلة (<span id="active-ips-count">0</span>/5)</h3>
+                        <div class="ip-progress">
+                            <div class="progress-bar" id="ip-progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="active-ips-list"></div>
+                    </div>
+                </div>
+
+                <!-- IP History -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> تاريخ التفعيل</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="ip-history-list"></div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-shield-alt"></i> إعدادات الأمان</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="security-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="log-attempts" checked>
+                                <span>تسجيل محاولات الدخول</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="notify-attempts">
+                                <span>إشعار عند محاولة دخول جديدة</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="auto-block">
+                                <span>حظر تلقائي للمحاولات المشبوهة</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="section">
+            <div class="container">
+                <h2><i class="fas fa-cog"></i> الإعدادات</h2>
+
+                <div class="settings-grid">
+                    <!-- Interface Settings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-palette"></i> إعدادات الواجهة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="setting-item">
+                                <label>اللغة</label>
+                                <select id="settings-language">
+                                    <option value="ar">العربية</option>
+                                    <option value="en">English</option>
+                                    <option value="zh">中文</option>
+                                    <option value="ru">Русский</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>المظهر</label>
+                                <div class="theme-options">
+                                    <label class="theme-option">
+                                        <input type="radio" name="theme" value="light" checked>
+                                        <span><i class="fas fa-sun"></i> فاتح</span>
+                                    </label>
+                                    <label class="theme-option">
+                                        <input type="radio" name="theme" value="dark">
+                                        <span><i class="fas fa-moon"></i> داكن</span>
+                                    </label>
+                                    <label class="theme-option">
+                                        <input type="radio" name="theme" value="auto">
+                                        <span><i class="fas fa-desktop"></i> تلقائي</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Encryption Settings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-shield-alt"></i> إعدادات التشفير</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="setting-item">
+                                <label>مستوى التشفير الافتراضي</label>
+                                <select id="default-encryption">
+                                    <option value="light">خفيف</option>
+                                    <option value="medium" selected>متوسط</option>
+                                    <option value="strong">قوي</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" id="save-history" checked>
+                                    <span>حفظ تاريخ التشفير</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" id="auto-delete">
+                                    <span>حذف الملفات الأصلية تلقائياً</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Settings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user"></i> إعدادات الحساب</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="account-info">
+                                <div class="account-type">
+                                    <i class="fas fa-crown"></i>
+                                    <span>حساب مجاني</span>
+                                </div>
+                                <div class="account-stats">
+                                    <span id="account-remaining">5</span> ملفات متبقية
+                                </div>
+                            </div>
+                            <button class="btn btn-upgrade">
+                                <i class="fas fa-arrow-up"></i>
+                                الترقية إلى الحساب المدفوع
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="save-settings">
+                    <button class="btn btn-primary" id="save-settings-btn">
+                        <i class="fas fa-save"></i>
+                        حفظ الإعدادات
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CryptoFiles</h4>
+                    <p>منصة تشفير الملفات الأكثر أماناً وسهولة في الاستخدام</p>
+                </div>
+                <div class="footer-section">
+                    <h4>الخدمات</h4>
+                    <ul>
+                        <li><a href="#encrypt">تشفير الملفات</a></li>
+                        <li><a href="#ip-activation">تفعيل IP</a></li>
+                        <li><a href="#">API للمطورين</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>الدعم</h4>
+                    <ul>
+                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="#">التقارير</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تابعنا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CryptoFiles. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
