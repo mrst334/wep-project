@@ -1,98 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Abo salman</title>
-  </head>
-  <body>
-    <div class="container"></div>
-    <header>
-      <img src="assets/imgs/logoo.png" alt="abo salman logo" />
-      <nav class="navigation">
-        <ul>
-          <li><a href="#aboutMe">About Me</a></li>
-          <li><a href="#MyWorks">My Works</a></li>
-          <li><a href="#contactMe">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-    <hr />
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تعلم العرضة الجنوبية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
-    <section class="hero">
-      <img class="arrow" src="assets/svg/arrow.svg" alt="arrow" />
-      <div class="heroSub">
-        <h1 class="name">I’m Abdullah salman</h1>
-        <h1 class="title">programmer</h1>
-        <div class="heroBtns">
-          <a class="hireMe" href="#contactMe">Hire me</a>
-          </a>
-        </div>
-      </div>
-      <img src="assets/svg/Hero.svg" alt="hero image" class="heroImg" />
-    </section>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDV6F4L5uM__DbpHxKYvfTWxcCPV7zWIZM",
+      authDomain: "barmajni-support.firebaseapp.com",
+      projectId: "barmajni-support",
+      storageBucket: "barmajni-support.appspot.com",
+      messagingSenderId: "906423164466",
+      appId: "1:906423164466:web:c40fa06690b7844a62662b"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-    <section class="aboutMe" id="aboutMe">
-      <img
-        src="assets/svg/AboutMe.svg"
-        alt="aboutMe image"
-        class="aboutMeImg"
-      />
-      <div class="textContainer">
-        <div class="textTitle">
-          <h1 class="aboutName">About</h1>
-          <h1 class="aboutTitle">me</h1>
-          <img src="assets/svg/lightbulb.svg" alt="ligh" class="light" />
-        </div>
-        <p class="aboutMePar">
-I am Abdullah Salman Al-Qarni. I am a website programmer, script designer, car and map designer. I have 5 programming languages: html.js.python.css.lua. I am also a script developer and a map, clothing and car designer in FiveM      </div>
-    </section>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+    header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    nav {
+      background-color: #222;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00ffd0;
+    }
+    .hero {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Traditional_Saudi_Dance.jpg/800px-Traditional_Saudi_Dance.jpg') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .hero h2 {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      font-size: 28px;
+      border-radius: 8px;
+    }
+    section {
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+      display: none;
+    }
+    section.active {
+      display: block;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    section h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    section p {
+      line-height: 1.8;
+    }
+    .video-box {
+      background-color: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .video-box iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 8px;
+    }
+    footer {
+      background-color: #111;
+      color: #bbb;
+      text-align: center;
+      padding: 15px;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 400px;
+      margin: auto;
+    }
+    .modal-content button {
+      margin-top: 15px;
+      background-color: #00ffd0;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
 
-    <section class="works" id="MyWorks">
-      <div class="worksContainer">
-        <div class="projectTitle">
-          <h1 class="aboutName">My recent</h1>
-          <h1 class="aboutTitle">works</h1>
-        </div>
-        <ul>
-          <li>
-            <a href=""
-              ><img src="assets/imgs/bnr.png" alt="pehub Page"
-            /></a>
-          </li>
-          <li>
-            <a href=""><img src="assets/imgs/bnr1.png" alt="Wep App" /></a>
-          </li>
-          <li>
-          </li>
-        </ul>
-      </div>
-    </section>
+  <header>
+    <h1>موقع تعلم العرضة الجنوبية</h1>
+  </header>
 
-    <section class="contactContainer" id="contactMe">
-      <div class="contactTitle">
-        <h1 class="aboutName">Contact</h1>
-        <h1 class="aboutTitle">me</h1>
-      </div>
-      <div class="contact">
-        <div class="emailAndPhone">
-          <img src="assets/svg/Email.svg" alt="email logo" />
-          <a href="mailto:mkbusiness202@gmail.com"
-            ><h3>asas7478500@gmail.com</h3></a
-          >
-        </div>
-        <div class="emailAndPhone">
-          <img src="assets/svg/phone.svg" alt="phone logo" />
-          <h3>+966 552520678</h3>
-        </div>
-      </div>
-      <div class="socialMedia">
-      </div>
-    </section>
-    <hr />
-    <footer>
-      <p>Built by abo salman.</p>
-    </footer>
-  </body>
+  <nav>
+    <a href="#" onclick="showSection('home')">الرئيسية</a>
+    <a href="#" onclick="showSection('about')">عن العرضة</a>
+    <a href="#" onclick="showSection('videos')">دروس فيديو</a>
+  </nav>
+
+  <div class="hero" id="home">
+    <h2>تعلم العرضة الجنوبية خطوة بخطوة</h2>
+  </div>
+
+  <section id="main-home" class="active">
+    <h3>نبذة عن العرضة الجنوبية</h3>
+    <p>
+      العرضة الجنوبية فن تراثي أصيل يعكس روح الفخر والانتماء لدى أبناء الجنوب، وتتميز بخطواتها المنتظمة وأناشيدها التي تلهب الحماس.
+    </p>
+  </section>
+
+  <section id="about">
+    <h3>ما هي العرضة الجنوبية؟</h3>
+    <p>
+      العرضة الجنوبية هي إحدى الفنون الشعبية العريقة في المملكة العربية السعودية، وتُمارس في المناسبات الوطنية والاحتفالات. تتكون من الصفوف المتقابلة والرقص بالسيوف والإيقاعات على الطبول.
+    </p>
+  </section>
+
+  <section id="videos">
+    <h3>دروس الفيديو</h3>
+
+    <div class="video-box">
+      <iframe src="https://www.youtube.com/embed/cB4z2yL9XLY" allowfullscreen></iframe>
+      <p>شرح الفيديو: العرضة الجنوبية رد الست.</p>
+    </div>
+
+    <div class="video-box">
+      <iframe src="https://www.youtube.com/embed/QDpUmC0X6zA" allowfullscreen></iframe>
+      <p>شرح الفيديو: هذي يسمونها زوعه الجنوب.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 موقع العرضة الجنوبية | جميع الحقوق محفوظة<br>
+    إشراف نايف مرعي القرني | تطوير عبدالله سلمان الحراث القرني
+  </footer>
+
+  <!-- مودال مخصص -->
+  <div class="modal" id="customModal">
+    <div class="modal-content">
+      <p id="modalText">رسالة تنبيه</p>
+      <button onclick="closeModal()">حسنًا</button>
+    </div>
+  </div>
+
+  <!-- جافاسكربت -->
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+      document.querySelector('#main-home').style.display = 'none';
+      document.querySelector('.hero').style.display = 'none';
+      if (id === 'home') {
+        document.querySelector('#main-home').classList.add('active');
+        document.querySelector('.hero').style.display = 'flex';
+      } else {
+        document.querySelector(`#${id}`).classList.add('active');
+      }
+    }
+
+    function showModal(message) {
+      document.getElementById('modalText').innerText = message;
+      document.getElementById('customModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('customModal').style.display = 'none';
+    }
+
+    // التحقق من تسجيل الدخول وتفعيل الإيميل
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user && user.emailVerified) {
+        // كل شيء تمام
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+
+</body>
 </html>

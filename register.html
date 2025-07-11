@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>إنشاء حساب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDV6F4L5uM__DbpHxKYvfTWxcCPV7zWIZM",
+    authDomain: "barmajni-support.firebaseapp.com",
+    projectId: "barmajni-support",
+    storageBucket: "barmajni-support.appspot.com",
+    messagingSenderId: "906423164466",
+    appId: "1:906423164466:web:c40fa06690b7844a62662b"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom, #121212, #1e1e1e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+    .register-box {
+      background-color: #2c2c2c;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      width: 350px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .register-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ffd0;
+    }
+    .register-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      background-color: #444;
+      color: white;
+      font-size: 15px;
+    }
+    .register-box input::placeholder {
+      color: #bbb;
+    }
+    .register-box button {
+      width: 100%;
+      background-color: #00ffd0;
+      color: #000;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .register-box button:hover {
+      background-color: #00c7aa;
+    }
+    .register-box p {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    .register-box a {
+      color: #00ffd0;
+      text-decoration: none;
+    }
+
+    /* المودال */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      animation: fadeInUp 0.5s ease;
+    }
+    .modal-content p {
+      margin: 0 0 15px;
+    }
+    .modal-content button {
+      background: #00ffd0;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>إنشاء حساب جديد</h2>
+    <form onsubmit="registerUser(event)">
+      <input type="text" id="name" placeholder="الاسم الكامل" required>
+      <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+      <input type="password" id="password" placeholder="كلمة المرور" required>
+      <button type="submit">تسجيل</button>
+      <p>هل لديك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
+    </form>
+  </div>
+
+  <!-- مودال النجاح -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <p>تم التسجيل بنجاح!</p>
+      <button onclick="closeModalAndRedirect()">انتقال إلى تسجيل الدخول</button>
+    </div>
+  </div>
+
+  <script>
+    function registerUser(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      users.push({ name, email, password });
+      localStorage.setItem('users', JSON.stringify(users));
+      showSuccessModal();
+    }
+
+    function showSuccessModal() {
+      document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeModalAndRedirect() {
+      document.getElementById('successModal').style.display = 'none';
+      window.location.href = 'login.html';
+    }
+  </script>
+
+
+</body>
+</html>
